@@ -20,12 +20,24 @@ body {
 }
 
 /* Main Styles */
+.header-info {
+    
+}
+
+.time-section {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 20px;
+    padding-top: 20px;
+    font-weight: 100;
+}
+
 main {
     height: 100vh;
 }
 
 .main-info {
-    height: 50%;
+    height: 40%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -46,7 +58,7 @@ main {
 
 /* Footer Styles */
 .footer-info {
-    height: 50%;
+    height: 54%;
     padding: 0 10px;
     background-color: rgba(0, 0, 0, 0.5);
 }
