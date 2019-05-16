@@ -32,9 +32,8 @@ const months = [
     "Dezembro",
 ];
 const ONE_MINUTE = 60000;
-const ONE_DAY = 1440000;
 const WEATHER_UPDATE = 180000;
-let weatherData
+let shouldDisplayCurrentDate = true;
 
 if ('geolocation' in navigator) {
     init();
@@ -43,12 +42,12 @@ if ('geolocation' in navigator) {
 }
 
 async function init() {
-    // getWeatherData();
+    getWeatherData();
     getCurrentWeather();
     displayCurrentTime();
     displayCurrentDate();
-    updateDisplays(displayCurrentDate, ONE_DAY);
-    updateDisplays(displayCurrentTime, ONE_MINUTE);
+    updateDisplays(displayCurrentDate, 1000);
+    updateDisplays(displayCurrentTime, 1000);
     updateDisplays(getCurrentWeather, WEATHER_UPDATE);
 }
 
@@ -60,8 +59,8 @@ function getWeatherData() {
             const CALL = `${_SERVER_NAME}/forecast?lat=${pos.coords.latitude}&lon=${pos.coords.longitude}&appid=${_API_KEY}`;
             fetch(CALL, initHeaders)
                 .then(data => data.json())
-                .then(async json => {
-                    handleWeatherData(json);
+                .then(weatherData => {
+                    handleWeatherData(weatherData.list);
                 });
         },
         error => console.error(error),
@@ -69,6 +68,25 @@ function getWeatherData() {
     );
 }
 
+function handleWeatherData(weatherData) {
+    if (!weatherData) return;
+
+    weatherData.filter((el, index, array) => {
+        const day = el.dt_txt.substr(8, 2);
+        const otherDay = array[index + 1].dt_txt.substr(8, 2);
+        if (day !== otherDay) {
+            displayWeekForecast(otherDay)
+        }
+
+    });
+}
+
+function displayWeekForecast(weekForecast) {
+    console.log(weekForecast)
+   
+}
+
+// CURRENT WEATHER DATA 
 function getCurrentWeather() {
     navigator.geolocation.getCurrentPosition(pos => {
         const CALL = `${_SERVER_NAME}/weather?lat=${pos.coords.latitude}&lon=${pos.coords.longitude}&appid=${_API_KEY}`;
@@ -85,7 +103,6 @@ function displayCurrenteLocationData(data) {
     currentCity.innerHTML = `${data.name}, ${data.sys.country}`;
     currentTemperature.innerHTML = `${kelvinToCelcius(data.main.temp).toFixed(1, 10)}°`
 }
-
 
 // TIME FUNCTIONS 
 function getCurrentTime() {
@@ -114,10 +131,27 @@ function displayCurrentTime() {
 }
 
 function displayCurrentDate() {
+    const timeData = getCurrentTime();
+    let day = document.querySelector('#day') ? parseInt(document.querySelector('#day').innerHTML) : null;
+
+    if (shouldDisplayCurrentDate) {
+        shouldDisplayCurrentDate = false;
+        handleDisplay();
+    }
+
+    if (!day) return;
+
+    if (timeData.day !== day) {
+        console.log('banana')
+        handleDisplay();
+    }
+
+}
+
+function handleDisplay() {
     const dateInfoHTML = document.querySelector('#date-info');
-    timeData = getCurrentTime();
     dateInfoHTML.innerHTML = `
-        <span>${timeData.weekday}</span>, <span>${timeData.day}</span> de <span>${timeData.month}</span>
+        <span>${timeData.weekday}</span>, <span id="day">${timeData.day}</span> de <span>${timeData.month}</span>
     `;
 }
 
@@ -125,11 +159,11 @@ function updateDisplays(displayToUpdate, timeInterval) {
     setInterval(displayToUpdate, timeInterval);
 }
 
+// Temperature convertion funcs
 function farenheitToCelcius(temperature) {
     return ((temperature - 32) * (5 / 9));
 }
 
 function kelvinToCelcius(temperature) {
-    console.log(temperature)
     return (temperature - 273.15);
 }
