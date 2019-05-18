@@ -11,25 +11,45 @@
 
 <body>
     <main>
-        <header class="header-infor">
+        <!-- HEADER -->
+        <header class="header-info">
             <div class="time-section">
                 <div id="date-info"></div>
                 <div id="time-info"></div>
             </div>
         </header>
-        <section class="main-info">
-            <div class="main-info--container">
-                <div id="current-city">
-                    --
+        <section class="current-weather--info" id="current-weather--info">
+            <!-- MAIN INFO -->
+            <section class="main-info">
+                <section class="main-info--container">
+                    <div id="weather-icon">
+                        <img src="./public/img/Infinity-3.5s-200px.gif" width="50px" height="50px">
+                    </div>
+                    <div id="current-city">
+                        --
+                    </div>
+                    <div class="temperature-container" >
+                        <img id="thermometer-icon" width="20px" height="20px" src="./public/img/icons/thermometer.png" />
+                        <div id="current-temperature" class="current-temperature">
+                            --
+                        </div>
+                    </div>
+                </section>
+            </section>
+            <!-- SECONDARY INFO -->
+            <section class="secondary-info" id="secondary-info">
+                <div class="secondary-info--container">
+                    <div>Max: <span></span></div>
+                    <div>Min: <span></span></div>
                 </div>
-                <div id="current-temperature">
-                    --
-                    
+                <div class="secondary-info--container">
+                    <div>Humidade: <span></span></div>
+                    <div>Pressão: <span></span></div>
                 </div>
-                <img href="./public/img/icons/thermometer.png"/>
-            </div>
+            </section>
         </section>
-        <section class="footer-info">
+        <!-- FOOTER -->
+        <footer class="footer-info">
             <div class="week-days-info">
                 <span>Segunda</span>
                 <span>13°</span>
@@ -58,7 +78,7 @@
                 <span>Domigno</span>
                 <span>13°</span>
             </div>
-        </section>
+        </footer>
     </main>
 
     <script src="./public/js/app.js"></script>

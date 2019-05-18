@@ -1,3 +1,7 @@
+:root {
+    --transparent-dark-bg: rgba(0, 0, 0, 0.5);
+    --transparent-bg: transparent;
+}
 /* Reset Default Styles */
 * {
     padding: 0;
@@ -20,32 +24,56 @@ body {
 }
 
 /* Main Styles */
+main {
+    height: 100vh;
+}
+
+/* Header Styles */
 .header-info {
-    
+    display: flex;
+    width: 100%;
+    background-image: linear-gradient(var(--transparent-dark-bg), var(--transparent-dark-bg), var(--transparent-dark-bg), var(--transparent-bg));
+    height: 50px;
+    align-items: center;
+}
+
+/* Temperature Styles */
+.temperature-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 20px;
+}
+
+.current-temperature {
+    font-size: 26px;
+    -webkit-text-stroke: 1px #aaa;
 }
 
 .time-section {
     display: flex;
     justify-content: space-between;
     margin: 0 20px;
-    padding-top: 20px;
     font-weight: 100;
+    width: 100%;
 }
 
-main {
-    height: 100vh;
-}
-
-.main-info {
+.current-weather--info {
     height: 40%;
+}
+
+/* MAIN INFO */
+.main-info {
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 0 10px;
+    padding-top: 25px;
 }
 
 .main-info--container {
     text-align: center;
+    padding-bottom: 35px;
 }
 
 #main-info--city {
@@ -54,6 +82,17 @@ main {
 
 #main-info--temperature {
     font-size: 33px;
+}
+
+/* SECONDARY INFO */
+.secondary-info {
+    display: flex;
+    justify-content: space-around;
+    font-size: 14px;
+}
+
+.secondary-info--container {
+    padding: 0 10px 10px;
 }
 
 /* Footer Styles */
@@ -78,4 +117,23 @@ main {
 
 .week-days-info:last-child {
     border-bottom: none;
+}
+
+.loading {
+    opacity: 0;
+}
+
+.animation-loading-done {
+    opacity: 1;
+    animation: show .9s ease-in-out;
+}
+
+@keyframes show {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }
