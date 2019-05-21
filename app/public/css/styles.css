@@ -1,8 +1,10 @@
 :root {
-    --transparent-dark-bg: rgba(0, 0, 0, 0.5);
+    --transparent-dark-bg: rgba(0, 0, 0, 0.7);
     --transparent-bg: transparent;
 }
+
 /* Reset Default Styles */
+
 * {
     padding: 0;
     margin: 0;
@@ -21,14 +23,20 @@ body {
     background-image: url('../img/1080x1920.jpg');
     background-repeat: no-repeat;
     background-size: cover;
+    overflow: hidden;
 }
 
 /* Main Styles */
+
 main {
     height: 100vh;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
 }
 
 /* Header Styles */
+
 .header-info {
     display: flex;
     width: 100%;
@@ -38,6 +46,7 @@ main {
 }
 
 /* Temperature Styles */
+
 .temperature-container {
     display: flex;
     align-items: center;
@@ -63,6 +72,7 @@ main {
 }
 
 /* MAIN INFO */
+
 .main-info {
     display: flex;
     justify-content: center;
@@ -85,10 +95,13 @@ main {
 }
 
 /* SECONDARY INFO */
+
 .secondary-info {
     display: flex;
     justify-content: space-around;
     font-size: 14px;
+    padding-top: 30px;
+    font-weight: 100;
 }
 
 .secondary-info--container {
@@ -96,10 +109,40 @@ main {
 }
 
 /* Footer Styles */
+
 .footer-info {
-    height: 54%;
-    padding: 0 10px;
-    background-color: rgba(0, 0, 0, 0.5);
+    height: 44%;
+    padding: 40px 10px 0 10px;
+    background-image: linear-gradient(to top, var(--transparent-dark-bg), var(--transparent-dark-bg), var(--transparent-dark-bg), var(--transparent-dark-bg), var(--transparent-dark-bg), var(--transparent-dark-bg), var(--transparent-dark-bg), transparent);
+    font-weight: 100;
+}
+
+.icon-temp-min {
+    height: 25px;
+    width: 25px;
+    background-image: url('../img/low-temperature.png');
+    background-repeat: no-repeat;
+}
+
+.icon-temp-max {
+    height: 25px;
+    width: 25px;
+    background-image: url('../img/high-temperature.png');
+    background-repeat: no-repeat;
+}
+
+.temp-container {
+    display: flex;
+    align-items: center;
+}
+
+.temp-container div {
+    width: 25px;
+    height: 25px;
+}
+
+.temp-container span {
+    width: 30px;
 }
 
 .week-days-info {
@@ -111,8 +154,12 @@ main {
     padding: 0 5px;
 }
 
+.week-days-info span:first-child {
+    width: 51%;
+}
+
 .week-days-info:first-child {
-    border-top: 1px solid #bbb;
+    /* border-top: nn; */
 }
 
 .week-days-info:last-child {
@@ -125,14 +172,13 @@ main {
 
 .animation-loading-done {
     opacity: 1;
-    animation: show .9s ease-in-out;
+    animation: show .5s ease-in-out;
 }
 
 @keyframes show {
     0% {
         opacity: 0;
     }
-
     100% {
         opacity: 1;
     }
