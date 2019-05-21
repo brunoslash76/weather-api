@@ -169,6 +169,7 @@ function mountTemplateForecast(days) {
 
 function displayWeekForecast(template) {
 	const footerInfo = document.querySelector("#footer-info");
+	footerInfo.classList.remove("center-loading");
 	footerInfo.innerHTML = "";
 	template.forEach(el => (footerInfo.innerHTML += el));
 }

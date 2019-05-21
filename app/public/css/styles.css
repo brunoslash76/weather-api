@@ -117,6 +117,13 @@ main {
     font-weight: 100;
 }
 
+.center-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 40px;
+}
+
 .icon-temp-min {
     height: 25px;
     width: 25px;
@@ -156,10 +163,6 @@ main {
 
 .week-days-info span:first-child {
     width: 51%;
-}
-
-.week-days-info:first-child {
-    /* border-top: nn; */
 }
 
 .week-days-info:last-child {
