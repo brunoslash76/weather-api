@@ -5,10 +5,11 @@ const _SERVER_NAME = "http://api.openweathermap.org/data/2.5";
 const headers = new Headers();
 const initHeaders = {
 	method: "GET",
-	headers: headers,
+	headers,
 	mode: "cors",
 	cache: "default"
 };
+
 const weekDays = [
 	"Domingo",
 	"Segunda-Feira",
@@ -18,6 +19,7 @@ const weekDays = [
 	"Sexta-Feira",
 	"Sábado"
 ];
+
 const months = [
 	"Janeiro",
 	"Fevereiro",
@@ -176,15 +178,18 @@ function displayWeekForecast(template) {
 
 // CURRENT WEATHER DATA
 function getCurrentWeather() {
-	navigator.geolocation.getCurrentPosition(pos => {
-		const CALL = `${_SERVER_NAME}/weather?lat=${pos.coords.latitude}&lon=${
-			pos.coords.longitude
-			}&appid=${_API_KEY}`;
-		fetch(CALL, initHeaders)
-			.then(data => data.json())
-			.then(json => displayCurrenteLocationData(json))
-			.catch(e => console.error(e));
-	});
+	navigator.geolocation.getCurrentPosition(
+		pos => {
+			const CALL = `${_SERVER_NAME}/weather?lat=${pos.coords.latitude}&lon=${
+				pos.coords.longitude
+				}&appid=${_API_KEY}`;
+			fetch(CALL, initHeaders)
+				.then(data => data.json())
+				.then(json => displayCurrenteLocationData(json))
+				.catch(e => console.error(e));
+		},
+		error => {}
+	);
 }
 
 function displayCurrenteLocationData(data) {
